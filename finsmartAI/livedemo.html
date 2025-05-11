@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Financial Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="livedemo.css">
+</head>
+<body>
+ 
+  <div id="demoModal" class="modal" style="display: block;">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>Smart Financial Dashboard</h2>
+      <p>Automated expense tracking with AI-powered insights</p>
+       
+      
+      <div class="demo-tabs">
+        <button class="tab-button active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-button" data-tab="budget">Budget</button>
+        <button class="tab-button" data-tab="savings">Savings</button>
+        <button class="tab-button" data-tab="analysis">Analysis</button>
+      </div>
+      
+      
+      <div id="dashboard-tab" class="tab-content active">
+        <div class="auto-tracking">
+          <div class="auto-tracking-header">
+            <h3>Automatic Expense Tracking</h3>
+            <div class="connection-status connected">
+              <i class="fas fa-check-circle"></i>
+              <span>Connected</span>
+            </div>
+          </div>
+          <p>Your accounts are automatically syncing transactions with AI-powered categorization</p>
+          
+          <div class="bank-connections">
+            <div class="bank-card" data-bank="Chase">
+              <div class="bank-logo">CB</div>
+              <div>
+                <div class="transaction-merchant">Chase Bank</div>
+                <div class="transaction-date">•••• 3847</div>
+              </div>
+            </div>
+            <div class="bank-card" data-bank="Amex">
+              <div class="bank-logo">AM</div>
+              <div>
+                <div class="transaction-merchant">American Express</div>
+                <div class="transaction-date">•••• 9821</div>
+              </div>
+            </div>
+            <div class="bank-card" data-bank="BofA">
+              <div class="bank-logo">BofA</div>
+              <div>
+                <div class="transaction-merchant">Bank of America</div>
+                <div class="transaction-date">•••• 5532</div>
+              </div>
+            </div>
+            <div class="bank-card" data-bank="Wells">
+              <div class="bank-logo">WF</div>
+              <div>
+                <div class="transaction-merchant">Wells Fargo</div>
+                <div class="transaction-date">•••• 7214</div>
+              </div>
+            </div>
+          </div>
+          
+          <button class="button button-outline" id="addAccountBtn" style="margin-top: 1rem;">
+            <i class="fas fa-plus"></i> Add Account
+          </button>
+        </div>
+        
+        <div class="transactions-list">
+          <h3>Recent Transactions</h3>
+          <p>AI-powered categorization with manual adjustment options</p>
+          
+          <div class="transaction">
+            <div class="transaction-info">
+              <div class="transaction-icon">
+                <i class="fas fa-shopping-basket"></i>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-merchant">Whole Foods Market</div>
+                <div class="transaction-date">Today • 12:45 PM</div>
+                <div class="transaction-category">
+                  <div class="category-tag">
+                    <i class="fas fa-tag"></i> Groceries
+                  </div>
+                  <div class="category-select">
+                    <select onchange="updateCategory(this, 'Groceries')">
+                      <option>Change category</option>
+                      <option>Groceries</option>
+                      <option>Dining</option>
+                      <option>Household</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transaction-amount">-$86.42</div>
+          </div>
+          
+          <div class="transaction">
+            <div class="transaction-info">
+              <div class="transaction-icon">
+                <i class="fas fa-gas-pump"></i>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-merchant">Shell Gas Station</div>
+                <div class="transaction-date">Yesterday • 5:30 PM</div>
+                <div class="transaction-category">
+                  <div class="category-tag">
+                    <i class="fas fa-tag"></i> Transportation
+                  </div>
+                  <div class="category-select">
+                    <select onchange="updateCategory(this, 'Transportation')">
+                      <option>Change category</option>
+                      <option>Transportation</option>
+                      <option>Fuel</option>
+                      <option>Auto Maintenance</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transaction-amount">-$42.30</div>
+          </div>
+          
+          <div class="transaction">
+            <div class="transaction-info">
+              <div class="transaction-icon">
+                <i class="fas fa-utensils"></i>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-merchant">Starbucks</div>
+                <div class="transaction-date">Yesterday • 8:15 AM</div>
+                <div class="transaction-category">
+                  <div class="category-tag">
+                    <i class="fas fa-tag"></i> Dining
+                  </div>
+                  <div class="category-select">
+                    <select onchange="updateCategory(this, 'Dining')">
+                      <option>Change category</option>
+                      <option>Dining</option>
+                      <option>Coffee</option>
+                      <option>Entertainment</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transaction-amount">-$5.75</div>
+          </div>
+          
+          <div class="transaction">
+            <div class="transaction-info">
+              <div class="transaction-icon">
+                <i class="fas fa-home"></i>
+              </div>
+              <div class="transaction-details">
+                <div class="transaction-merchant">Rent Payment</div>
+                <div class="transaction-date">May 1 • Automatic</div>
+                <div class="transaction-category">
+                  <div class="category-tag">
+                    <i class="fas fa-tag"></i> Housing
+                  </div>
+                  <div class="category-select">
+                    <select onchange="updateCategory(this, 'Housing')">
+                      <option>Change category</option>
+                      <option>Housing</option>
+                      <option>Rent</option>
+                      <option>Mortgage</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="transaction-amount">-$1,200.00</div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="budget-tab" class="tab-content">
+        <div class="budget-view">
+          <div class="budget-categories">
+            <h3>Monthly Budget</h3>
+            <p>Track your spending against budget goals</p>
+            
+            <div class="category-progress">
+              <div class="category">
+                <span>Housing</span>
+                <span>$1,200 / $1,200</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 100%"></div>
+              </div>
+              
+              <div class="category">
+                <span>Food</span>
+                <span>$450 / $600</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+              
+              <div class="category">
+                <span>Transportation</span>
+                <span>$180 / $250</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 72%"></div>
+              </div>
+              
+              <div class="category">
+                <span>Utilities</span>
+                <span>$150 / $200</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 75%"></div>
+              </div>
+              
+              <div class="category">
+                <span>Entertainment</span>
+                <span>$120 / $150</span>
+              </div>
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: 80%"></div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="budget-summary">
+            <h3>Budget Summary</h3>
+            <div class="summary-item">
+              <span>Total Budget</span>
+              <span>$2,400</span>
+            </div>
+            <div class="summary-item">
+              <span>Total Spent</span>
+              <span>$2,100</span>
+            </div>
+            <div class="summary-item">
+              <span>Remaining</span>
+              <span>$300</span>
+            </div>
+            <div class="summary-item total">
+              <span>Savings Rate</span>
+              <span>12.5%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div id="savings-tab" class="tab-content">
+        <div class="savings-goals">
+          <h3>Your Savings Goals</h3>
+          <p>Track your progress toward financial milestones</p>
+          
+          <div class="goal" onclick="showGoalDetails('Emergency Fund')">
+            <div class="goal-info">
+              <span>Emergency Fund</span>
+              <span>$3,000 / $6,000</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-fill" style="width: 50%"></div>
+            </div>
+          </div>
+          
+          <div class="goal" onclick="showGoalDetails('Vacation Fund')">
+            <div class="goal-info">
+              <span>Vacation Fund</span>
+              <span>$800 / $2,000</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-fill" style="width: 40%"></div>
+            </div>
+          </div>
+          
+          <div class="goal" onclick="showGoalDetails('New Car')">
+            <div class="goal-info">
+              <span>New Car</span>
+              <span>$2,500 / $15,000</span>
+            </div>
+            <div class="goal-progress">
+              <div class="goal-progress-fill" style="width: 17%"></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="savings-simulator">
+          <h3>Savings Simulator</h3>
+          <p>See how increasing your savings could help you reach goals faster</p>
+          
+          <label for="savingsSlider">Additional monthly savings: <span id="savingsValue">+$0/month</span></label>
+          <input type="range" id="savingsSlider" min="0" max="300" step="10" value="0">
+          
+          <div class="simulation-result">
+            <p>With this change, you'll reach your emergency fund goal <strong>0 months earlier</strong>.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div id="analysis-tab" class="tab-content">
+        <h3>Spending Analysis</h3>
+        <p>Compare your spending patterns over time</p>
+        
+        <div class="analysis-chart">
+          <div class="chart-container">
+            <canvas id="analysisCanvas"></canvas>
+          </div>
+          <div class="chart-controls">
+            <button class="button button-outline" onclick="updateChart('monthly')">Monthly</button>
+            <button class="button button-outline" onclick="updateChart('category')">By Category</button>
+          </div>
+        </div>
+        
+        <div class="insights">
+          <h3>AI-Powered Financial Insights</h3>
+          <ul>
+            <li>Your food spending is 15% higher than similar households</li>
+            <li>You've reduced entertainment spending by 20% this month</li>
+            <li>Your savings rate has improved by 5% over last quarter</li>
+            <li>Consider refinancing your mortgage to potentially save $150/month</li>
+            <li>Based on your spending patterns, we recommend increasing your emergency fund target by $1,000</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  
+  <div class="notification" id="notification">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificationText">Notification message</span>
+  </div>
+ <script src = "livedemo.js"></script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Expense Tracking</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+   <link rel="stylesheet" href="Expence.css">
+       
+</head>
+<body>
+    
+    <div class="container">
+        <section class="expense-tracking-section">
+            <div class="expense-header">
+                <h2>AI-Powered Expense Tracking</h2>
+                <button class="button connect-bank-btn">
+                    <i class="fas fa-plus"></i> Connect Account
+                </button>
+            </div>
+            
+            <div class="expense-tabs">
+                <div class="expense-tab active" data-tab="transactions">
+                    <i class="fas fa-exchange-alt"></i> Transactions
+                </div>
+                <div class="expense-tab" data-tab="categories">
+                    <i class="fas fa-tags"></i> Categories
+                </div>
+                <div class="expense-tab" data-tab="insights">
+                    <i class="fas fa-chart-line"></i> Insights
+                </div>
+            </div>
+            
+            <div class="stats-cards">
+                <div class="stat-card">
+                    <i class="fas fa-wallet"></i>
+                    <div class="stat-value">$4,287</div>
+                    <div class="stat-label">Monthly Spending</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tags"></i>
+                    <div class="stat-value">24</div>
+                    <div class="stat-label">Categories</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <div class="stat-value">87%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-lightbulb"></i>
+                    <div class="stat-value">12</div>
+                    <div class="stat-label">Savings Tips</div>
+                </div>
+            </div>
+            
+            <div class="expense-content active" id="transactions-tab">
+                <div class="sync-status">
+                    <i class="fas fa-check-circle"></i>
+                    <span>Last synced: Today at 2:45 PM</span>
+                    <button class="button small-button" style="margin-left: auto;">
+                        <i class="fas fa-sync-alt"></i> Sync Now
+                    </button>
+                </div>
+                
+                <div class="transaction-list">
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-name">Whole Foods Market</div>
+                            <div class="transaction-date">
+                                <i class="far fa-clock"></i> Today • Groceries
+                            </div>
+                        </div>
+                        <div class="transaction-amount">-$87.32</div>
+                        <button class="transaction-category">
+                            <i class="fas fa-tag"></i> Groceries
+                        </button>
+                        <div class="category-selector">
+                            <div class="category-option" data-category="groceries">
+                                <i class="fas fa-shopping-basket"></i> Groceries
+                            </div>
+                            <div class="category-option" data-category="dining">
+                                <i class="fas fa-utensils"></i> Dining Out
+                            </div>
+                            <div class="category-option" data-category="household">
+                                <i class="fas fa-home"></i> Household
+                            </div>
+                            <div class="category-option" data-category="other">
+                                <i class="fas fa-question"></i> Other
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-gas-pump"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-name">Shell Gas Station</div>
+                            <div class="transaction-date">
+                                <i class="far fa-clock"></i> Yesterday • Transportation
+                            </div>
+                        </div>
+                        <div class="transaction-amount">-$42.15</div>
+                        <button class="transaction-category">
+                            <i class="fas fa-tag"></i> Transportation
+                        </button>
+                    </div>
+                    
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-coffee"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-name">Starbucks</div>
+                            <div class="transaction-date">
+                                <i class="far fa-clock"></i> Yesterday • Dining
+                            </div>
+                        </div>
+                        <div class="transaction-amount">-$5.75</div>
+                        <button class="transaction-category">
+                            <i class="fas fa-tag"></i> Dining Out
+                        </button>
+                    </div>
+                    
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-name">Netflix Subscription</div>
+                            <div class="transaction-date">
+                                <i class="far fa-clock"></i> May 1 • Subscription
+                            </div>
+                        </div>
+                        <div class="transaction-amount">-$14.99</div>
+                        <button class="transaction-category">
+                            <i class="fas fa-tag"></i> Entertainment
+                        </button>
+                    </div>
+                    
+                    
+                    <div class="transaction-item">
+                        <div class="transaction-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-name">Rent Payment</div>
+                            <div class="transaction-date">
+                                <i class="far fa-clock"></i> May 1 • Housing
+                            </div>
+                        </div>
+                        <div class="transaction-amount">-$1,200.00</div>
+                        <button class="transaction-category">
+                            <i class="fas fa-tag"></i> Housing
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="transaction-actions">
+                    <button class="button button-outline" onclick="exportTransactions()">
+                        <i class="fas fa-file-export"></i> Export Transactions
+                    </button>
+                    <button class="button" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus"></i> Add Category
+                    </button>
+                </div>
+            </div>
+            
+            <div class="expense-content" id="categories-tab">
+                <h3>Your Spending Categories</h3>
+                <p>Customize how transactions are categorized</p>
+                
+                <div style="background-color: var(--light); padding: 2rem; border-radius: var(--border-radius); text-align: center;">
+                    <i class="fas fa-tags" style="font-size: 2rem; color: var(--primary); margin-bottom: 1rem;"></i>
+                    <p>Customize your expense categories and rules</p>
+                    <button class="button" onclick="showAddCategoryModal()">
+                        <i class="fas fa-plus"></i> Add New Category
+                    </button>
+                </div>
+            </div>
+            
+            <div class="expense-content" id="insights-tab">
+                <h3>AI Spending Insights</h3>
+                <p>Smart analysis of your financial patterns</p>
+                
+                <div style="background-color: var(--light); padding: 2rem; border-radius: var(--border-radius);">
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 50px; height: 50px; background-color: var(--primary); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">Savings Opportunity</h4>
+                            <p style="margin: 0.3rem 0 0; color: var(--text-light);">You could save 87/month on dining out</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                        <div style="width: 50px; height: 50px; background-color: var(--success); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">Spending Trend</h4>
+                            <p style="margin: 0.3rem 0 0; color: var(--text-light);">Your grocery spending decreased by 12% this month</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 50px; height: 50px; background-color: var(--warning); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                            <i class="fas fa-exclamation"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin: 0;">Alert</h4>
+                            <p style="margin: 0.3rem 0 0; color: var(--text-light);">Your transportation spending is 25% above budget</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Bank Connection Modal -->
+    <div id="bankModal" class="bank-connection-modal">
+        <div class="bank-modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Connect Your Bank Account</h2>
+            <p>Securely link your accounts to enable automatic transaction tracking</p>
+            
+            <div class="search-bank">
+                <input type="text" placeholder="Search for your bank...">
+                <button class="button">
+                    <i class="fas fa-search"></i> Search
+                </button>
+            </div>
+            
+            <div class="bank-options">
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/chase.com" alt="Chase" class="bank-logo">
+                    <span>Chase</span>
+                </div>
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/bankofamerica.com" alt="Bank of America" class="bank-logo">
+                    <span>Bank of America</span>
+                </div>
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/wellsfargo.com" alt="Wells Fargo" class="bank-logo">
+                    <span>Wells Fargo</span>
+                </div>
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/capitalone.com" alt="Capital One" class="bank-logo">
+                    <span>Capital One</span>
+                </div>
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/citi.com" alt="Citi" class="bank-logo">
+                    <span>Citi</span>
+                </div>
+                <div class="bank-option">
+                    <img src="https://logo.clearbit.com/usbank.com" alt="U.S. Bank" class="bank-logo">
+                    <span>U.S. Bank</span>
+                </div>
+            </div>
+
+            <div class="export-container">
+                <h1><i class="fas fa-file-export"></i> Export Transactions</h1>
+                
+                <div class="date-range">
+                    <h3>Date Range</h3>
+                    <div class="date-inputs">
+                        <div class="date-input">
+                            <label for="start-date">From</label>
+                            <input type="date" id="start-date" value="2023-01-01">
+                        </div>
+                        <div class="date-input">
+                            <label for="end-date">To</label>
+                            <input type="date" id="end-date" value="2023-12-31">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="checkbox-container">
+                    <div class="select-all">
+                        <input type="checkbox" id="select-all" checked>
+                        <label for="select-all">Select All Transactions</label>
+                    </div>
+                    
+                    <div id="transaction-checkboxes">
+                        <!-- Transactions will be added here by JavaScript -->
+                    </div>
+                </div>
+                
+                <div class="success-message" id="success-message">
+                    <i class="fas fa-check-circle"></i>
+                    <span id="success-text">Export completed successfully!</span>
+                </div>
+                
+                <table class="transaction-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Category</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody id="transaction-table-body">
+                        <!-- Sample transactions - in a real app these would be dynamic -->
+                        <tr>
+                            <td>2023-05-15</td>
+                            <td>Whole Foods Market</td>
+                            <td>Groceries</td>
+                            <td>-$87.32</td>
+                        </tr>
+                        <tr>
+                            <td>2023-05-14</td>
+                            <td>Shell Gas Station</td>
+                            <td>Transportation</td>
+                            <td>-$42.15</td>
+                        </tr>
+                        <tr>
+                            <td>2023-05-14</td>
+                            <td>Starbucks</td>
+                            <td>Dining</td>
+                            <td>-$5.75</td>
+                        </tr>
+                        <tr>
+                            <td>2023-05-01</td>
+                            <td>Netflix Subscription</td>
+                            <td>Entertainment</td>
+                            <td>-$14.99</td>
+                        </tr>
+                        <tr>
+                            <td>2023-05-01</td>
+                            <td>Rent Payment</td>
+                            <td>Housing</td>
+                            <td>-$1,200.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>Export Format</h3>
+                <div class="export-options">
+                    <div class="export-option" id="export-csv">
+                        <i class="fas fa-file-csv"></i>
+                        <h3>CSV File</h3>
+                        <p>Compatible with Excel and Google Sheets</p>
+                    </div>
+                    <div class="export-option" id="export-excel">
+                        <i class="fas fa-file-excel"></i>
+                        <h3>Excel File</h3>
+                        <p>Native Excel format (.xlsx)</p>
+                    </div>
+                    <div class="export-option" id="export-pdf">
+                        <i class="fas fa-file-pdf"></i>
+                        <h3>PDF Document</h3>
+                        <p>Printable report format</p>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="security-note">
+                <i class="fas fa-lock"></i>
+                <span>All connections are secure and read-only. We never store your banking credentials.</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Add category modal -->
+    <div id="categoryModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeCategoryModal()">&times;</span>
+            <h2>Add New Category</h2>
+            <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" id="categoryName" placeholder="Enter category name">
+            </div>
+            <div class="form-group">
+                <label for="categoryIcon">Icon</label>
+                <select id="categoryIcon">
+                    <option value="fa-shopping-cart">Shopping</option>
+                    <option value="fa-utensils">Food</option>
+                    <option value="fa-home">Housing</option>
+                    <option value="fa-car">Transport</option>
+                    <option value="fa-medkit">Healthcare</option>
+                    <option value="fa-graduation-cap">Education</option>
+                    <option value="fa-gamepad">Entertainment</option>
+                    <option value="fa-gift">Others</option>
+                </select>
+            </div>
+            <button class="button" onclick="addNewCategory()">Add Category</button>
+        </div>
+    </div>
+
+    <script>
+        let categories = [
+            { name: 'Shopping', icon: 'fa-shopping-cart' },
+            { name: 'Food', icon: 'fa-utensils' },
+            { name: 'Housing', icon: 'fa-home' },
+            { name: 'Transport', icon: 'fa-car' }
+        ];
+
+        function showAddCategoryModal() {
+            document.getElementById('categoryModal').style.display = 'block';
+        }
+
+        function closeCategoryModal() {
+            document.getElementById('categoryModal').style.display = 'none';
+        }
+
+        function addNewCategory() {
+            const name = document.getElementById('categoryName').value;
+            const icon = document.getElementById('categoryIcon').value;
+            
+            if (!name) {
+                alert('Please enter a category name');
+                return;
+            }
+            
+            categories.push({ name, icon });
+            updateCategoryOptions();
+            closeCategoryModal();
+            document.getElementById('categoryName').value = '';
+        }
+
+        function updateCategoryOptions() {
+            const categorySelectors = document.querySelectorAll('.category-selector');
+            categorySelectors.forEach(selector => {
+                selector.innerHTML = categories.map(cat => `
+                    <div class="category-option" onclick="updateTransactionCategory(this)" data-category="${cat.name}">
+                        <i class="fas ${cat.icon}"></i>
+                        ${cat.name}
+                    </div>
+                `).join('');
+            });
+        }
+
+        function exportTransactions() {
+            // Sample transaction data - replace with your actual data
+            const transactions = [
+                { date: '2023-08-01', description: 'Grocery Shopping', amount: 150.00, category: 'Shopping' },
+                { date: '2023-08-02', description: 'Restaurant', amount: 45.00, category: 'Food' }
+            ];
+
+            // Create CSV content
+            const csvContent = 'Date,Description,Amount,Category\n' +
+                transactions.map(t => `${t.date},"${t.description}",${t.amount},${t.category}`).join('\n');
+
+            // Create blob and download
+            const blob = new Blob([csvContent], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'transactions.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        // Expense Tracking Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching
+            const tabs = document.querySelectorAll('.expense-tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    
+                    const tabId = tab.getAttribute('data-tab') + '-tab';
+                    document.querySelectorAll('.expense-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Bank connection modal
+            const bankModal = document.getElementById('bankModal');
+            const connectBtn = document.querySelector('.connect-bank-btn');
+            const closeModal = document.querySelector('.bank-connection-modal .close-modal');
+            
+            connectBtn.addEventListener('click', () => {
+                bankModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeModal.addEventListener('click', () => {
+                bankModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            window.addEventListener('click', (e) => {
+                if (e.target === bankModal) {
+                    bankModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Category selection
+            const categoryElements = document.querySelectorAll('.transaction-category');
+            categoryElements.forEach(category => {
+                category.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const selector = category.nextElementSibling;
+                    const allSelectors = document.querySelectorAll('.category-selector');
+                    
+                    allSelectors.forEach(s => {
+                        if (s !== selector) s.style.display = 'none';
+                    });
+                    
+                    selector.style.display = selector.style.display === 'block' ? 'none' : 'block';
+                    
+                    // Position the selector
+                    const rect = category.getBoundingClientRect();
+                    selector.style.top = `${rect.bottom + window.scrollY}px`;
+                    selector.style.left = `${rect.left + window.scrollX}px`;
+                });
+            });
+            
+            // Close category selectors when clicking elsewhere
+            document.addEventListener('click', () => {
+                document.querySelectorAll('.category-selector').forEach(selector => {
+                    selector.style.display = 'none';
+                });
+            });
+            
+            // Handle category selection
+            document.querySelectorAll('.category-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    const selector = this.parentElement;
+                    const categoryElement = selector.previousElementSibling;
+                    
+                    // Update the button text and icon
+                    const icon = this.querySelector('i').className;
+                    const text = this.textContent.trim();
+                    categoryElement.innerHTML = `<i class="${icon}"></i> ${text}`;
+                    
+                    selector.style.display = 'none';
+                    
+                    // In a real app, you would save this change to the backend
+                    console.log(`Category changed to: ${category}`);
+                    
+                    // Show confirmation
+                    const originalText = categoryElement.innerHTML;
+                    categoryElement.innerHTML = `<i class="fas fa-check"></i> Updated`;
+                    categoryElement.style.backgroundColor = 'var(--success)';
+                    categoryElement.style.color = 'white';
+                    
+                    setTimeout(() => {
+                        categoryElement.innerHTML = originalText;
+                        categoryElement.style.backgroundColor = '';
+                        categoryElement.style.color = '';
+                    }, 1500);
+                });
+            });
+            
+            // Bank option selection
+            document.querySelectorAll('.bank-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // In a real app, this would initiate the OAuth connection flow
+                    const bankName = this.querySelector('span').textContent;
+                    
+                    // Show loading state
+                    const syncStatus = document.querySelector('.sync-status');
+                    syncStatus.innerHTML = `
+                        <i class="fas fa-sync-alt fa-spin"></i>
+                        <span>Connecting to ${bankName}...</span>
+                    `;
+                    
+                    // Close modal
+                    bankModal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                    
+                    // Simulate connection process
+                    setTimeout(() => {
+                        syncStatus.innerHTML = `
+                            <i class="fas fa-check-circle"></i>
+                            <span>Successfully connected to ${bankName}</span>
+                            <button class="button small-button" style="margin-left: auto;">
+                                <i class="fas fa-sync-alt"></i> Sync Now
+                            </button>
+                        `;
+                        
+                        // Add to connected banks list
+                        const bankCards = document.createElement('div');
+                        bankCards.className = 'bank-card';
+                        bankCards.innerHTML = `
+                            <div class="bank-logo">${bankName.substring(0, 2)}</div>
+                            <div>
+                                <div class="transaction-merchant">${bankName}</div>
+                                <div class="transaction-date">•••• 1234</div>
+                            </div>
+                        `;
+                        document.querySelector('.auto-tracking').appendChild(bankCards);
+                        
+                        // Show success notification
+                        alert(`${bankName} successfully connected! Transactions will begin syncing.`);
+                    }, 2000);
+                });
+            });
+            
+            // Sync now button functionality
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('.sync-status .button')) {
+                    const syncStatus = e.target.closest('.sync-status');
+                    syncStatus.innerHTML = `
+                        <i class="fas fa-sync-alt fa-spin"></i>
+                        <span>Syncing transactions...</span>
+                    `;
+                    
+                    setTimeout(() => {
+                        syncStatus.innerHTML = `
+                            <i class="fas fa-check-circle"></i>
+                            <span>Sync complete. 12 new transactions added.</span>
+                            <button class="button small-button" style="margin-left: auto;">
+                                <i class="fas fa-sync-alt"></i> Sync Now
+                            </button>
+                        `;
+                    }, 1500);
+                }
+            });
+
+            // Add click event listener to your export button
+        });
+    </script>
+    <script src="expense.js"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - FinSmart AI</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="signup.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box">
+            <h1>Create Account</h1>
+            <div class="error-message"></div>
+            <div class="success-message"></div>
+            <form id="signupForm" onsubmit="return handleSignup(event)">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                </div>
+                <div class="form-group password-toggle">
+                    <input type="password" id="password" placeholder="Password" required>
+                    <i class="fas fa-eye" id="togglePassword"></i>
+                    <div class="password-strength">
+                        <div class="strength-meter"></div>
+                    </div>
+                </div>
+                <div class="terms-group">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+                </div>
+                <button type="submit" class="button">Sign Up</button>
+            </form>
+            <p>Already have an account? <a href="login.html">Login</a></p>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript functionality
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const terms = document.getElementById('terms').checked;
+
+            // Validation
+            if (!name || !email || !password) {
+                showError('Please fill in all fields');
+                return false;
+            }
+
+            if (!terms) {
+                showError('You must accept the terms and conditions');
+                return false;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters');
+                return false;
+            }
+
+            if (!validateEmail(email)) {
+                showError('Please enter a valid email address');
+                return false;
+            }
+
+            // Store user data
+            const userData = {
+                name: name,
+                email: email,
+                password: password // Note: In real apps, never store raw passwords
+            };
+
+            localStorage.setItem('userData', JSON.stringify(userData));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            // Show success and redirect
+            showSuccess('Account created successfully! Redirecting...');
+            
+            setTimeout(() => {
+                window.location.href = 'fineesmart.html';
+            }, 1500);
+            
+            return false;
+        }
+
+        function validateEmail(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        }
+
+        function showError(message) {
+            const errorElement = document.querySelector('.error-message');
+            errorElement.textContent = message;
+            errorElement.style.display = 'block';
+            document.querySelector('.success-message').style.display = 'none';
+            
+            setTimeout(() => {
+                errorElement.style.display = 'none';
+            }, 3000);
+        }
+
+        function showSuccess(message) {
+            const successElement = document.querySelector('.success-message');
+            successElement.textContent = message;
+            successElement.style.display = 'block';
+            document.querySelector('.error-message').style.display = 'none';
+        }
+
+        // Password strength indicator
+        document.getElementById('password').addEventListener('input', function() {
+            const strengthBar = document.querySelector('.strength-meter');
+            const strength = calculatePasswordStrength(this.value);
+            
+            if (strength < 2) {
+                strengthBar.style.backgroundColor = 'var(--error-color)';
+                strengthBar.style.width = '33%';
+            } else if (strength < 4) {
+                strengthBar.style.backgroundColor = 'orange';
+                strengthBar.style.width = '66%';
+            } else {
+                strengthBar.style.backgroundColor = 'var(--success-color)';
+                strengthBar.style.width = '100%';
+            }
+        });
+
+        function calculatePasswordStrength(password) {
+            let strength = 0;
+            if (password.length > 6) strength++;
+            if (password.length > 10) strength++;
+            if (/[A-Z]/.test(password)) strength++;
+            if (/[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            return strength;
+        }
+
+        // Password toggle visibility
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const icon = this;
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Intelligent Budgeting & Savings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="finesmart.css">
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!sessionStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+            }
+            
+            // Display user email if needed
+            const userEmail = sessionStorage.getItem('userEmail');
+            if (userEmail) {
+                document.getElementById('userEmailDisplay').textContent = userEmail;
+            }
+        });
+    </script>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    FinSmart AI
+                </div>
+                <button class="mobile-menu-btn" id="mobileMenuBtn">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#features">Features</a>
+                    <a href="#how-it-works">How It Works</a>
+                    <a href="#demo">Demo</a>
+                    <a href="Expence.html">Expence Tracking</a>
+                    <a href="portfolio.html">Portfolio</a>
+                    <a href="chatbot.html" class="button">AI Assistant</a>
+                    <a href="#login" class="button button-outline">Sign In</a>
+                    
+                </div>
+            </nav>
+        </div>
+    </header>
+    
+    <section class="hero">
+        <div class="container">
+            <h1>AI-Powered Financial Freedom</h1>
+            <p>Let our intelligent algorithms optimize your spending and maximize your savings automatically</p>
+            <button class="cta-button">Get Started for Free</button>
+        </div>
+    </section>
+    
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Smart Financial Features</h2>
+                <p>Our AI-powered tools help you take control of your finances with minimal effort</p>
+            </div>
+            <div class="features">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <h3>Smart Expense Tracking</h3>
+                    <p>Our AI categorizes and analyzes your spending patterns to identify savings opportunities you didn't know existed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Automated Budgeting</h3>
+                    <p>Personalized budgets that adapt to your income, goals, and spending habits with real-time adjustments.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-piggy-bank"></i>
+                    </div>
+                    <h3>Predictive Savings</h3>
+                    <p>Forecasts future expenses and recommends optimal savings amounts to reach your goals faster.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How FinSmart AI Works</h2>
+                <p>Getting started with intelligent financial planning has never been easier</p>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Connect Securely</h3>
+                    <p>Link your bank accounts with read-only access for complete security.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>AI Analysis</h3>
+                    <p>Our algorithms analyze your financial history and patterns.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Get Recommendations</h3>
+                    <p>Receive personalized budgeting and savings recommendations.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Watch Savings Grow</h3>
+                    <p>Automatically optimize your finances and achieve your goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="demo" class="demo">
+        <div class="container">
+            <div class="section-title">
+                <h2>See It In Action</h2>
+                <p>Experience how FinSmart AI transforms your financial management</p>
+            </div>
+            <div class="demo-container">
+                <div class="demo-text">
+                    <h3>Interactive Budget Dashboard</h3>
+                    <p>Our AI-powered dashboard gives you a complete view of your finances with actionable insights and automated suggestions for improvement.</p>
+                    <ul style="margin-top: 1rem; list-style-position: inside;">
+                        <li style="margin-bottom: 0.5rem;">Real-time spending analysis</li>
+                        <li style="margin-bottom: 0.5rem;">Customizable budget categories</li>
+                        <li style="margin-bottom: 0.5rem;">Savings goal tracking</li>
+                        <li style="margin-bottom: 0.5rem;">Financial health score</li>
+                    </ul>
+                    <button class="button try-demo-btn" style="margin-top: 1.5rem;">Try Live Demo</button>
+                </div>
+                <div class="demo-image">
+                    <i class="fas fa-chart-line" style="font-size: 3rem;"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="budget-calculator">
+        <div class="container">
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">Personalized Budget Calculator</h2>
+            <form id="calculatorForm" class="calculator-form">
+                <div class="form-group">
+                    <label for="income">Monthly Income ($)</label>
+                    <input type="number" id="income" required>
+                </div>
+                <div class="form-group">
+                    <label for="housing">Housing Expenses ($)</label>
+                    <input type="number" id="housing">
+                </div>
+                <div class="form-group">
+                    <label for="utilities">Utilities ($)</label>
+                    <input type="number" id="utilities">
+                </div>
+                <div class="form-group">
+                    <label for="groceries">Groceries ($)</label>
+                    <input type="number" id="groceries">
+                </div>
+                <div class="form-group">
+                    <label for="transportation">Transportation ($)</label>
+                    <input type="number" id="transportation">
+                </div>
+                <div class="form-group">
+                    <label for="debt">Monthly Debt Payments ($)</label>
+                    <input type="number" id="debt">
+                </div>
+                <div class="form-group">
+                    <label for="savingsGoal">Savings Goal (%)</label>
+                    <input type="number" id="savingsGoal" min="0" max="100" value="20">
+                </div>
+                <button type="submit" class="button" style="width: 100%;">Calculate Optimal Budget</button>
+            </form>
+            <div id="calculatorResults" class="calculator-results">
+                <h3 style="margin-bottom: 1rem;">Your Recommended Budget</h3>
+                <div class="result-item">
+                    <span>Essential Expenses:</span>
+                    <span id="essentialExpenses">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Discretionary Spending:</span>
+                    <span id="discretionary">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Recommended Savings:</span>
+                    <span id="recommendedSavings">$0</span>
+                </div>
+                <div class="result-item">
+                    <span>Available for Debt Payment:</span>
+                    <span id="debtPayment">$0</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Users Say</h2>
+                <p>Thousands of users have transformed their financial lives with FinSmart AI</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "FinSmart AI helped me save $500 in the first month by identifying unnecessary subscriptions I'd forgotten about. The AI recommendations are spot on!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SD</div>
+                        <div class="author-info">
+                            <h4>Sarah D.</h4>
+                            <p>Marketing Manager, 32</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "As a freelancer with irregular income, the predictive budgeting feature has been a game-changer. I finally feel in control of my finances."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">MJ</div>
+                        <div class="author-info">
+                            <h4>Michael J.</h4>
+                            <p>Freelance Designer, 28</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The automated savings feature has helped me build an emergency fund without even thinking about it. I've saved $3,000 in six months!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AL</div>
+                        <div class="author-info">
+                            <h4>Amanda L.</h4>
+                            <p>Teacher, 41</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Simple, Transparent Pricing</h2>
+                <p>Choose the plan that fits your financial goals</p>
+            </div>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">$0 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Expense Tracking</li>
+                        <li>Basic Budgeting</li>
+                        <li>Manual Savings Goals</li>
+                        <li>Email Support</li>
+                    </ul>
+                    <button class="button button-outline">Get Started</button>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-badge">Most Popular</div>
+                    <h3>Pro</h3>
+                    <div class="price">$9.99 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Basic</li>
+                        <li>AI-Powered Budgeting</li>
+                        <li>Automated Savings</li>
+                        <li>Debt Payoff Planner</li>
+                        <li>Priority Support</li>
+                    </ul>
+                    <button class="button">Start Free Trial</button>
+                </div>
+                <div class="pricing-card">
+                    <h3>Family</h3>
+                    <div class="price">$14.99 <span>/month</span></div>
+                    <ul class="pricing-features">
+                        <li>Everything in Pro</li>
+                        <li>Up to 5 Family Members</li>
+                        <li>Shared Financial Goals</li>
+                        <li>Family Spending Insights</li>
+                        <li>Dedicated Account Manager</li>
+                    </ul>
+                    <button class="button button-outline">Start Free Trial</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Transform Your Finances?</h2>
+            <p>Join over 100,000 users who have saved an average of $2,400 in their first year with FinSmart AI</p>
+            <button class="cta-button">Start Your Free Trial</button>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h3>FinSmart AI</h3>
+                    <p>Intelligent financial planning powered by artificial intelligence to help you achieve your money goals.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Product</h3>
+                    <ul>
+                        <li><a href="#">Features</a></li>
+                        <li><a href="#">Pricing</a></li>
+                        <li><a href="#">Demo</a></li>
+                        <li><a href="#">Updates</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Support</h3>
+                    <ul>
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Security</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 FinSmart AI. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Demo Modal -->
+    <div id="demoModal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>FinSmart AI Interactive Demo</h2>
+            
+            <div class="demo-tabs">
+                <button class="tab-button active" data-tab="dashboard">Dashboard</button>
+                <button class="tab-button" data-tab="budget">Budget</button>
+                <button class="tab-button" data-tab="savings">Savings</button>
+                <button class="tab-button" data-tab="analysis">Analysis</button>
+            </div>
+            
+            <div class="tab-content active" id="dashboard-tab">
+                <div class="demo-dashboard">
+                    <div class="demo-card">
+                        <h3>Financial Health Score</h3>
+                        <div class="score-circle" id="healthScore">78</div>
+                        <p>Good - Better than 65% of users</p>
+                    </div>
+                    
+                    <div class="demo-card">
+                        <h3>Monthly Spending</h3>
+                        <div class="spending-chart" id="spendingChart">
+                            <canvas id="chartCanvas" width="300" height="200"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-card">
+                        <h3>Top Recommendations</h3>
+                        <ul class="recommendations">
+                            <li>Reduce dining out by $120/month</li>
+                            <li>Increase 401k contribution by 2%</li>
+                            <li>Refinance auto loan (save $45/month)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="budget-tab">
+                <div class="budget-view">
+                    <div class="budget-categories">
+                        <h3>Budget Categories</h3>
+                        <div class="category-progress">
+                            <div class="category">
+                                <span>Housing</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 85%"></div>
+                                </div>
+                                <span>$1,700/$2,000</span>
+                            </div>
+                            <div class="category">
+                                <span>Food</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 72%"></div>
+                                </div>
+                                <span>$540/$750</span>
+                            </div>
+                            <div class="category">
+                                <span>Transportation</span>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 45%"></div>
+                                </div>
+                                <span>$225/$500</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="budget-summary">
+                        <h3>Budget Summary</h3>
+                        <div class="summary-item">
+                            <span>Monthly Income:</span>
+                            <span>$5,200</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Monthly Expenses:</span>
+                            <span>$3,850</span>
+                        </div>
+                        <div class="summary-item">
+                            <span>Monthly Savings:</span>
+                            <span>$1,050</span>
+                        </div>
+                        <div class="summary-item total">
+                            <span>Remaining:</span>
+                            <span>$300</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="savings-tab">
+                <div class="savings-goals">
+                    <h3>Your Savings Goals</h3>
+                    <div class="goal">
+                        <div class="goal-info">
+                            <h4>Emergency Fund</h4>
+                            <p>$3,500/$5,000 (70%)</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="goal">
+                        <div class="goal-info">
+                            <h4>Vacation Fund</h4>
+                            <p>$1,200/$2,500 (48%)</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 48%"></div>
+                        </div>
+                    </div>
+                    <div class="goal">
+                        <div class="goal-info">
+                            <h4>Down Payment</h4>
+                            <p>$8,750/$25,000 (35%)</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 35%"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="savings-simulator">
+                    <h3>Savings Simulator</h3>
+                    <div class="form-group">
+                        <label>Monthly Savings Increase:</label>
+                        <input type="range" id="savingsSlider" min="0" max="500" value="100" step="50">
+                        <span id="savingsValue">+$100/month</span>
+                    </div>
+                    <div class="simulation-result">
+                        <p>With this change, you'll reach your emergency fund goal <strong>3 months earlier</strong>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="tab-content" id="analysis-tab">
+                <div class="spending-analysis">
+                    <h3>Spending Analysis</h3>
+                    <div class="analysis-chart">
+                        <canvas id="analysisCanvas" width="400" height="300"></canvas>
+                    </div>
+                    <div class="insights">
+                        <h4>AI Insights</h4>
+                        <ul>
+                            <li>Your dining out spending is 25% higher than similar households</li>
+                            <li>You could save $45/month by switching cell phone carriers</li>
+                            <li>Your grocery spending is very efficient (better than 82% of users)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-footer">
+                <p>This is a simulated demo. <a href="#" class="signup-link">Sign up</a> to connect your real accounts.</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Budget Calculator
+        const calculatorForm = document.getElementById('calculatorForm');
+        const calculatorResults = document.getElementById('calculatorResults');
+        
+        calculatorForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Get input values
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const housing = parseFloat(document.getElementById('housing').value) || 0;
+            const utilities = parseFloat(document.getElementById('utilities').value) || 0;
+            const groceries = parseFloat(document.getElementById('groceries').value) || 0;
+            const transportation = parseFloat(document.getElementById('transportation').value) || 0;
+            const debt = parseFloat(document.getElementById('debt').value) || 0;
+            const savingsGoal = parseFloat(document.getElementById('savingsGoal').value) || 20;
+            
+            // Calculate essential expenses
+            const essentialExpenses = housing + utilities + groceries + transportation;
+            
+            // Calculate recommended savings (percentage of income)
+            const recommendedSavings = income * (savingsGoal / 100);
+            
+            // Calculate discretionary spending
+            const discretionary = income - essentialExpenses - recommendedSavings - debt;
+            
+            // Update results
+            document.getElementById('essentialExpenses').textContent = `$${essentialExpenses.toFixed(2)}`;
+            document.getElementById('discretionary').textContent = `$${Math.max(0, discretionary).toFixed(2)}`;
+            document.getElementById('recommendedSavings').textContent = `$${recommendedSavings.toFixed(2)}`;
+            document.getElementById('debtPayment').textContent = `$${debt.toFixed(2)}`;
+            
+            // Show results
+            calculatorResults.style.display = 'block';
+            
+            // Scroll to results
+            calculatorResults.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Demo Modal Functionality
+        const demoModal = document.getElementById('demoModal');
+        const demoButtons = document.querySelectorAll('.try-demo-btn, .button[href="#demo"]');
+        const closeModal = document.querySelector('.close-modal');
+        
+        // Open modal when any demo button is clicked
+        demoButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                demoModal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+                
+                // Initialize charts when modal opens
+                initDemoCharts();
+            });
+        });
+        
+        // Close modal when X is clicked
+        closeModal.addEventListener('click', () => {
+            demoModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+        
+        // Close modal when clicking outside content
+        window.addEventListener('click', (e) => {
+            if (e.target === demoModal) {
+                demoModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+        
+        // Tab functionality
+        const tabButtons = document.querySelectorAll('.tab-button');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons and content
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                // Add active class to clicked button and corresponding content
+                button.classList.add('active');
+                const tabId = button.getAttribute('data-tab') + '-tab';
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+        
+        // Savings slider
+        const savingsSlider = document.getElementById('savingsSlider');
+        const savingsValue = document.getElementById('savingsValue');
+        
+        savingsSlider.addEventListener('input', () => {
+            const value = savingsSlider.value;
+            savingsValue.textContent = `+$${value}/month`;
+            
+            // Simple simulation - in a real app this would be more sophisticated
+            const monthsSaved = Math.floor(Math.random() * 5) + 1;
+            document.querySelector('.simulation-result p').innerHTML = 
+                `With this change, you'll reach your emergency fund goal <strong>${monthsSaved} months earlier</strong>.`;
+        });
+        
+        // Initialize Charts
+        function initDemoCharts() {
+            // Spending Chart (Pie)
+            const spendingCtx = document.getElementById('chartCanvas').getContext('2d');
+            new Chart(spendingCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Housing', 'Food', 'Transport', 'Utilities', 'Entertainment', 'Other'],
+                    datasets: [{
+                        data: [35, 20, 15, 10, 12, 8],
+                        backgroundColor: [
+                            '#4a6bff',
+                            '#00d4ff',
+                            '#28a745',
+                            '#ffc107',
+                            '#dc3545',
+                            '#6c757d'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'right'
+                        }
+                    }
+                }
+            });
+            
+            // Analysis Chart (Bar)
+            const analysisCtx = document.getElementById('analysisCanvas').getContext('2d');
+            new Chart(analysisCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
+                    datasets: [{
+                        label: 'Your Spending',
+                        data: [3200, 3500, 3800, 4100, 3850],
+                        backgroundColor: '#4a6bff'
+                    }, {
+                        label: 'Similar Households',
+                        data: [3500, 3600, 3700, 3800, 3900],
+                        backgroundColor: '#00d4ff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Monthly Spending ($)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                    
+                    // Scroll to target
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+<script>
+function checkAuth() {
+    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'index.html';
+    }
+}
+
+function handleLogout() {
+    localStorage.removeItem('isLoggedIn');
+    window.location.href = 'index.html';
+}
+
+// Check auth on page load
+checkAuth();
+
+// Add logout handler to logout button
+document.querySelector('.button-outline').addEventListener('click', handleLogout);
+
+function showAddCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'block';
+}
+
+function closeCategoryModal() {
+    document.getElementById('categoryModal').style.display = 'none';
+}
+
+function addCategory(event) {
+    event.preventDefault();
+    
+    const name = document.getElementById('categoryName').value;
+    const limit = document.getElementById('categoryLimit').value;
+    const color = document.getElementById('categoryColor').value;
+    
+    // Create new category object
+    const category = {
+        name: name,
+        limit: parseFloat(limit),
+        color: color,
+        id: Date.now()
+    };
+    
+    // Get existing categories from localStorage
+    let categories = JSON.parse(localStorage.getItem('categories') || '[]');
+    categories.push(category);
+    
+    // Save updated categories
+    localStorage.setItem('categories', JSON.stringify(categories));
+    
+    // Reset form and close modal
+    event.target.reset();
+    closeCategoryModal();
+    
+    // Refresh category display
+    displayCategories();
+}
+
+function displayCategories() {
+    const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+    const categoryList = document.querySelector('.category-list');
+    
+    if (categoryList) {
+        categoryList.innerHTML = categories.map(category => `
+            <div class="category-item">
+                <div class="category-info">
+                    <div class="category-color" style="background-color: ${category.color}"></div>
+                    <span>${category.name}</span>
+                </div>
+                <span>$${category.limit.toFixed(2)}</span>
+            </div>
+        `).join('');
+    }
+}
+
+// Initialize categories display when page loads
+document.addEventListener('DOMContentLoaded', displayCategories);
+</script>
+<div class="modal" id="categoryModal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeCategoryModal()">&times;</span>
+        <h2>Add New Expense Category</h2>
+        <form id="categoryForm" onsubmit="addCategory(event)">
+            <div class="form-group">
+                <label for="categoryName">Category Name</label>
+                <input type="text" id="categoryName" required>
+            </div>
+            <div class="form-group">
+                <label for="categoryLimit">Monthly Limit</label>
+                <input type="number" id="categoryLimit" required min="0">
+            </div>
+            <div class="form-group">
+                <label for="categoryColor">Category Color</label>
+                <input type="color" id="categoryColor" value="#4a6bff">
+            </div>
+            <button type="submit" class="button">Add Category</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

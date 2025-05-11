@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Chat Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="chatbot.css">
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <i class="fas fa-robot"></i>
+            <span>FinSmart AI</span>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-header">
+                <i class="fas fa-comments"></i>
+                <h2>Financial Assistant</h2>
+            </div>
+            
+            <div class="chat-messages" id="chatMessages">
+               
+            </div>
+            
+            <div class="chat-input-container">
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Ask me anything about finances..." />
+                    <button id="sendButton">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                
+                <div class="suggestions">
+                    <div class="suggestion">How to save more?</div>
+                    <div class="suggestion">Budget tips</div>
+                    <div class="suggestion">Investing advice</div>
+                    <div class="suggestion">Debt management</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src = "chatbot.js"></script>
+</body>
+</html>

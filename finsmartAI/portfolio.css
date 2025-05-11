@@ -1,0 +1,202 @@
+        :root {
+            --primary: #4a6bff;
+            --primary-dark: #3a5bef;
+            --secondary: #00d4ff;
+            --dark: #1a1a2e;
+            --darker: #0f0f1f;
+            --light: #f8f9fa;
+            --lighter: #ffffff;
+            --gray: #e9ecef;
+            --success: #28a745;
+            --danger: #dc3545;
+            --warning: #ffc107;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .portfolio-dashboard {
+            margin-top: 2rem;
+        }
+        
+        .portfolio-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .summary-card h3 {
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--dark);
+            margin: 0.5rem 0;
+        }
+        
+        .change {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .positive {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: var(--success);
+        }
+        
+        .negative {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: var(--danger);
+        }
+        
+        .holdings-table {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .table-header {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding: 1rem;
+            background-color: var(--gray);
+            border-radius: 5px;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .holding-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray);
+            align-items: center;
+        }
+        
+        .stock-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .stock-symbol {
+            font-weight: 600;
+            color: var(--dark);
+        }
+        
+        .stock-name {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .risk-assessment {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .risk-meter {
+            background: var(--gray);
+            height: 10px;
+            border-radius: 5px;
+            margin: 1.5rem 0;
+            position: relative;
+        }
+        
+        .risk-level {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            background: linear-gradient(to right, var(--success), var(--warning), var(--danger));
+            border-radius: 5px;
+            width: 65%;
+        }
+        
+        .risk-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .risk-recommendations {
+            margin-top: 1.5rem;
+        }
+        
+        .risk-recommendations h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .risk-recommendations ul {
+            list-style: none;
+        }
+        
+        .risk-recommendations li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .risk-recommendations li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        @media (max-width: 768px) {
+            .holding-item, .table-header {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+            }
+        }
+   

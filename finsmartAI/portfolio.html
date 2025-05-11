@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="portfolio.css">
+</head>
+<body>
+    <!-- Investment Section -->
+    <div class="investment-section container">
+        <div class="section-title">
+            <h2>Investment Portfolio</h2>
+            <p>Track and manage your investments with smart recommendations</p>
+        </div>
+        
+        <!-- Portfolio Dashboard -->
+        <div class="portfolio-dashboard">
+            <div class="portfolio-summary">
+                <div class="summary-card total-value">
+                    <h3>Total Portfolio Value</h3>
+                    <div class="value">$125,750.00</div>
+                    <div class="change positive">+2.5% <span>today</span></div>
+                </div>
+                <div class="summary-card performance">
+                    <h3>Performance</h3>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <div class="summary-card allocation">
+                    <h3>Asset Allocation</h3>
+                    <canvas id="allocationChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Stock Holdings -->
+            <div class="stock-holdings">
+                <h3>Your Holdings</h3>
+                <div class="holdings-table">
+                    <div class="table-header">
+                        <div>Stock</div>
+                        <div>Shares</div>
+                        <div>Price</div>
+                        <div>Value</div>
+                        <div>Change</div>
+                    </div>
+                    <div class="holding-item">
+                        <div class="stock-info">
+                            <span class="stock-symbol">AAPL</span>
+                            <span class="stock-name">Apple Inc.</span>
+                        </div>
+                        <div>25</div>
+                        <div>$175.25</div>
+                        <div>$4,381.25</div>
+                        <div class="change positive">+1.2%</div>
+                    </div>
+                    <div class="holding-item">
+                        <div class="stock-info">
+                            <span class="stock-symbol">MSFT</span>
+                            <span class="stock-name">Microsoft Corp.</span>
+                        </div>
+                        <div>30</div>
+                        <div>$285.50</div>
+                        <div>$8,565.00</div>
+                        <div class="change positive">+0.8%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Risk Assessment -->
+            <div class="risk-assessment">
+                <h3>Risk Profile</h3>
+                <div class="risk-meter">
+                    <div class="risk-level"></div>
+                    <div class="risk-labels">
+                        <span>Conservative</span>
+                        <span>Moderate</span>
+                        <span>Aggressive</span>
+                    </div>
+                </div>
+                <div class="risk-recommendations">
+                    <h4>Personalized Recommendations</h4>
+                    <ul>
+                        <li>Consider diversifying into emerging markets</li>
+                        <li>Maintain 60/40 stock/bond ratio</li>
+                        <li>Review high-yield dividend stocks</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src = "portfolio.js"></script>
+</body>
+</html>

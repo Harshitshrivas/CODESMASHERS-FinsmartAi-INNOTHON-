@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinSmart AI - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="dashboardd.css">
+</head>
+<body>
+    <!-- Session Check -->
+    <!-- <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if (!sessionStorage.getItem('isLoggedIn')) {
+                window.location.href = 'login.html';
+            }
+            
+            // Display user email if needed
+            const userEmail = sessionStorage.getItem('userEmail');
+            if (userEmail) {
+                document.getElementById('userEmailDisplay').textContent = userEmail;
+            }
+        });
+    </script> -->
+
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+        <div class="sidebar-header">
+            <i class="fas fa-robot"></i>
+            <span>FinSmart AI</span>
+        </div>
+        <div class="user-info">
+            <div class="user-avatar">JS</div>
+            <div class="user-details">
+                <span id="userName">John Smith</span>
+                <span id="userEmail" class="user-email">john@example.com</span>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="active">
+                <a href="#"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="Expence.html"><i class="fas fa-chart-line"></i> Transactions</a>
+            </li>
+            <li>
+                <a href="fineesmart.html"><i class="fas fa-wallet"></i> Budget</a>
+            </li>
+            <li>
+                <a href="fineesmart.html#savings"><i class="fas fa-piggy-bank"></i> Savings</a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-chart-pie"></i> Reports</a>
+            </li>
+            <li>
+                <a href="#"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+        </ul>
+        <div class="sidebar-footer">
+            <button onclick="logout()" class="logout-btn">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </nav>
+
+    
+    <main class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <button class="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="search-bar">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Search...">
+            </div>
+            <div class="top-bar-actions">
+                <button class="notification-btn">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <button class="help-btn">
+                    <i class="fas fa-question-circle"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="dashboard-grid">
+            <!-- Financial Overview Cards -->
+            <div class="card overview-card">
+                <h3>Total Balance</h3>
+                <p class="amount">$12,500.00</p>
+                <span class="trend positive">
+                    <i class="fas fa-arrow-up"></i> 8.2%
+                </span>
+            </div>
+            <div class="card overview-card">
+                <h3>Monthly Income</h3>
+                <p class="amount">$5,200.00</p>
+                <span class="trend positive">
+                    <i class="fas fa-arrow-up"></i> 4.5%
+                </span>
+            </div>
+            <div class="card overview-card">
+                <h3>Monthly Expenses</h3>
+                <p class="amount">$3,850.00</p>
+                <span class="trend negative">
+                    <i class="fas fa-arrow-down"></i> 2.1%
+                </span>
+            </div>
+            <div class="card overview-card">
+                <h3>Savings</h3>
+                <p class="amount">$1,350.00</p>
+                <span class="trend positive">
+                    <i class="fas fa-arrow-up"></i> 12.3%
+                </span>
+            </div>
+
+            <!-- Spending Chart -->
+            <div class="card chart-card">
+                <div class="card-header">
+                    <h3>Spending Analysis</h3>
+                    <div class="card-actions">
+                        <select id="chartPeriod">
+                            <option value="week">This Week</option>
+                            <option value="month" selected>This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                </div>
+                <canvas id="spendingChart"></canvas>
+            </div>
+
+            <!-- Budget Progress -->
+            <div class="card budget-card">
+                <h3>Budget Overview</h3>
+                <div class="budget-categories">
+                    <div class="budget-category">
+                        <div class="category-header">
+                            <span>Housing</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 85%"></div>
+                        </div>
+                        <span class="amount">$1,700/$2,000</span>
+                    </div>
+                    <div class="budget-category">
+                        <div class="category-header">
+                            <span>Food</span>
+                            <span>72%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 72%"></div>
+                        </div>
+                        <span class="amount">$540/$750</span>
+                    </div>
+                    <div class="budget-category">
+                        <div class="category-header">
+                            <span>Transportation</span>
+                            <span>45%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 45%"></div>
+                        </div>
+                        <span class="amount">$225/$500</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Transactions -->
+            <div class="card transactions-card">
+                <div class="card-header">
+                    <h3>Recent Transactions</h3>
+                    <div class="card-actions">
+                        <button class="button button-primary" onclick="showAddTransactionModal()"> 
+                            <i class="fas fa-plus"></i> 
+                            Add New 
+                        </button> 
+                        <button class="button button-outline" onclick="showTransactionFilters()"> 
+                            <i class="fas fa-filter"></i> 
+                            Filter 
+                        </button> 
+                        <button class="button button-icon" onclick="exportTransactions()"> 
+                            <i class="fas fa-download"></i> 
+                        </button> 
+                    </div>
+                </div>
+                <div class="transactions-filters" style="display: none;">
+                    <select id="categoryFilter">
+                        <option value="all">All Categories</option>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                    <input type="date" id="dateFilter">
+                    <input type="text" placeholder="Search transactions..." id="searchFilter">
+                </div>
+                <div class="transactions-list">
+                    
+                </div>
+                <div class="transactions-pagination">
+                    <button class="button button-outline" onclick="loadMoreTransactions()">Load More</button>
+                </div>
+            </div>
+
+            <!-- Reports Section -->
+            <div class="card reports-card">
+                <div class="card-header">
+                    <h3>Financial Reports</h3>
+                    <div class="card-actions">
+                        <button class="button button-outline" onclick="generateReport('monthly')">Generate Report</button>
+                        <div class="dropdown">
+                            <button class="button button-icon">
+                                <i class="fas fa-download"></i>
+                            </button>
+                            <div class="dropdown-content">
+                                <a href="#" onclick="exportReport('pdf')">Export as PDF</a>
+                                <a href="#" onclick="exportReport('excel')">Export as Excel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="report-content">
+                    <div class="report-summary">
+                        <div class="summary-item" data-overview="income">
+                            <h4>Total Income</h4>
+                            <p class="amount">$0.00</p>
+                        </div>
+                        <div class="summary-item" data-overview="expenses">
+                            <h4>Total Expenses</h4>
+                            <p class="amount">$0.00</p>
+                        </div>
+                        <div class="summary-item" data-overview="savings">
+                            <h4>Net Savings</h4>
+                            <p class="amount">$0.00</p>
+                        </div>
+                    </div>
+                    <div class="report-categories">
+                        <h4>Expense Breakdown</h4>
+                        <div class="category-list">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Savings Goals -->
+            <div class="card goals-card">
+                <h3>Savings Goals</h3>
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-info">
+                            <h4>Emergency Fund</h4>
+                            <p>$3,500/$5,000</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 70%"></div>
+                        </div>
+                    </div>
+                    <div class="goal-item">
+                        <div class="goal-info">
+                            <h4>New Car</h4>
+                            <p>$8,000/$15,000</p>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress" style="width: 53%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- <script src="dashboard.js"></script> -->
+</body>
+</html>
